@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     mockBookingService = BookingService(
-        serviceName: 'Mock Service',
+        serviceName: 'Booking Service',
         serviceDuration: 60,
         bookingEnd: DateTime(now.year, now.month, now.day, 24, 0),
         bookingStart: DateTime(now.year, now.month, now.day, 9, 0));
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   Stream<dynamic>? getBookingStreamMock(
       {required DateTime end, required DateTime start}) {
-    return Stream.value(["sdfsdf"]);
+    return Stream.value([""]);
   }
 
   Future<dynamic> uploadBookingMock(
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     FirebaseFirestore.instance.collection('users').doc(_email).update({
       'booking_start': newBooking.toJson()['bookingStart'],
       'booking_end': newBooking.toJson()['bookingEnd'],
-      'booking_date': newBooking.toJson()['bookingDate'],
+      'booking_date': DateTime.now(),
       'booking_duration': newBooking.toJson()['serviceDuration'],
     }).then((_) {
       Navigator.pushNamed(context, 'user_details');
