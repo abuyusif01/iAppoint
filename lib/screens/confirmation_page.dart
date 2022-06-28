@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iappoint/screens/login.dart';
 
@@ -36,10 +35,7 @@ class _ConfirmationState extends State<Confirmation> {
   void initState() {
     setState(() {
       super.initState();
-      // getData(LoginPage.getEmail()).whenComplete(() {
-      getData("sdf@f.com").whenComplete(() {
-        // super.initState();
-      });
+      getData(LoginPage.getEmail()).whenComplete(() {});
     });
   }
 
@@ -291,8 +287,6 @@ class _ConfirmationState extends State<Confirmation> {
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
-
-                              // margin: EdgeInsets.all(0),
                               child: Ink(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_calendar/booking_calendar.dart';
+import 'package:iappoint/screens/login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _email = LoginPage.getEmail();
   final now = DateTime.now();
   late BookingService mockBookingService;
   final auth = FirebaseAuth.instance;
@@ -32,42 +34,23 @@ class _HomePageState extends State<HomePage> {
 
   Future<dynamic> uploadBookingMock(
       {required BookingService newBooking}) async {
-    await Future.delayed(const Duration(seconds: 10));
+    await Future.delayed(const Duration(seconds: 1));
     converted.add(DateTimeRange(
         start: newBooking.bookingStart, end: newBooking.bookingEnd));
 
-    FirebaseFirestore.instance.collection('users').doc("sdf@f.com").update({
+    FirebaseFirestore.instance.collection('users').doc(_email).update({
       'booking_start': newBooking.toJson()['bookingStart'],
       'booking_end': newBooking.toJson()['bookingEnd'],
       'booking_date': newBooking.toJson()['bookingDate'],
       'booking_duration': newBooking.toJson()['serviceDuration'],
     }).then((_) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   const SnackBar(
-      //       content: Text('Booking Successpully'),
-      //       backgroundColor: Colors.green),
-      // );
       Navigator.pushNamed(context, 'user_details');
     });
-    // print('${newBooking.toJson()} has been uploaded');
   }
 
   List<DateTimeRange> converted = [];
 
   List<DateTimeRange> convertStreamResultMock({required dynamic streamResult}) {
-    ///here you can parse the streamresult and convert to [List<DateTimeRange>]
-    // DateTime first = now;
-    // DateTime second = now.add(const Duration(minutes: 55));
-    // DateTime third = now.subtract(const Duration(minutes: 240));
-    // DateTime fourth = now.subtract(const Duration(minutes: 500));
-    // converted.add(
-    //     DateTimeRange(start: first, end: now.add(const Duration(minutes: 30))));
-    // converted.add(DateTimeRange(
-    //     start: second, end: second.add(const Duration(minutes: 23))));
-    // converted.add(DateTimeRange(
-    //     start: third, end: third.add(const Duration(minutes: 15))));
-    // converted.add(DateTimeRange(
-    //     start: fourth, end: fourth.add(const Duration(minutes: 50))));
     return converted;
   }
 
@@ -77,11 +60,11 @@ class _HomePageState extends State<HomePage> {
         start: DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day, 0),
         end: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day, 9)),
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 8)),
     DateTimeRange(
         // this rule force
         start: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day, 18),
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 19),
         end: DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day, 24)),
   ];
@@ -89,6 +72,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Appointment Page',
         theme: ThemeData(
           primarySwatch: Colors.blue,

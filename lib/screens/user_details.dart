@@ -14,7 +14,7 @@ class UserDetails extends StatefulWidget {
 class _UserDetailsState extends State<UserDetails> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   static String user = LoginPage.getEmail();
-  // static String user = 'sdf@f.com';
+
   late String _fname, _lname, _age, _phoneNumber, _homeAddress, _comment;
   final CollectionReference colRef =
       FirebaseFirestore.instance.collection('users');
@@ -127,11 +127,10 @@ class _UserDetailsState extends State<UserDetails> {
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                 ),
                 validator: (String? value) {
-                  if (value == null ||
-                      value.isEmpty && !RegExp(r"^[0-9]+").hasMatch(value)) {
+                  if (!RegExp(r"^[0-9]+").hasMatch(value.toString())) {
                     return 'Enter a valid age';
                   } else {
-                    _age = value;
+                    _age = value.toString();
                   }
                   return null;
                 },
@@ -158,8 +157,7 @@ class _UserDetailsState extends State<UserDetails> {
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                 ),
                 validator: (String? value) {
-                  if ((!RegExp(r"^[0-9]+").hasMatch(value.toString()) &&
-                      (value == null || value.isEmpty))) {
+                  if (!RegExp(r"^[0-9]+").hasMatch(value.toString())) {
                     return 'Enter a valid phone number';
                   } else {
                     _phoneNumber = value.toString();
@@ -237,28 +235,38 @@ class _UserDetailsState extends State<UserDetails> {
                     // the form is invalid.
                     if (_formKey.currentState!.validate())
                       {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Submitted successfully'),
-                              backgroundColor: Colors.green),
-                        ),
-                        colRef.doc(user).update({
-                          'f_name': _fname,
-                          'l_name': _lname,
-                          'age': _age,
-                          'phone_number': _phoneNumber,
-                          'home_address': _homeAddress,
-                          'comment': _comment,
-                        })
-                      }
-                    else
-                      {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text(
-                                  'Problem occured during submitting user details'),
-                              backgroundColor: Colors.red),
-                        )
+                        colRef
+                            .doc(user)
+                            .update(
+                              {
+                                'f_name': _fname,
+                                'l_name': _lname,
+                                'age': _age,
+                                'phone_number': _phoneNumber,
+                                'home_address': _homeAddress,
+                                'comment': _comment,
+                              },
+                            )
+                            .then(
+                              (value) => {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Submitted successfully'),
+                                      backgroundColor: Colors.green),
+                                ),
+                                Navigator.pushNamed(context, 'confirm')
+                              },
+                            )
+                            .onError(
+                              (error, stackTrace) => {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'Something went wrong with firebase submission'),
+                                      backgroundColor: Colors.red),
+                                ),
+                              },
+                            )
                       }
                   },
                   style: TextButton.styleFrom(

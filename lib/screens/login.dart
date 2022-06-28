@@ -1,10 +1,8 @@
 // import 'package:flutter/cupertino.dart';
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
-import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:iappoint/screens/signup.dart';
 
 late String _email, _password;
 
@@ -14,7 +12,7 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
   static getEmail() {
-    return _email.isEmpty ? _email : null;
+    return _email;
   }
 }
 
@@ -150,9 +148,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 40,
                 ),
               ]),
             ),
