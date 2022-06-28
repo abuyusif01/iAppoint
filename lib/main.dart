@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:iappoint/screens/login.dart';
 import 'package:iappoint/firebase_options.dart';
 import 'package:iappoint/screens/confirmation_page.dart';
+import 'package:iappoint/screens/home.dart';
 import 'package:iappoint/screens/login.dart';
 import 'package:iappoint/screens/signup.dart';
 import 'package:iappoint/screens/user_details.dart';
@@ -23,11 +24,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'i-Appoint',
-      initialRoute: "confirm",
+      initialRoute: "home",
       routes: {
         'login': (context) => const LoginPage(),
         'signup': (context) => const SignUp(),
-        'home': (context) => const Confirmation(), // need to change this
+        'home': (context) => const HomePage(), // need to change this
         'confirm': (context) => const Confirmation(),
         'user_details': (context) => const UserDetails(),
       },

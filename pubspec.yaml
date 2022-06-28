@@ -29,6 +29,8 @@ environment:
 dependencies:
   auth_service:
     path: packages/auth_service
+  booking_calendar:
+    path: packages/booking_calendar
   flutter:
     sdk: flutter
 
