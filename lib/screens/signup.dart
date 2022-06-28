@@ -61,6 +61,7 @@ class _SignUpState extends State<SignUp> {
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.email),
                     errorText:
                         _emailValidate ? 'Enter a valid email address' : null,
                     focusedBorder: OutlineInputBorder(
@@ -82,6 +83,7 @@ class _SignUpState extends State<SignUp> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.lock),
                     errorText:
                         _passwordValidate ? 'Password cannot be empty' : null,
                     focusedBorder: OutlineInputBorder(
@@ -103,6 +105,7 @@ class _SignUpState extends State<SignUp> {
                   controller: _confirmPasswordController,
                   obscureText: true,
                   decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.lock),
                     errorText:
                         _passwordValidate ? 'Password cannot be empty' : null,
                     focusedBorder: OutlineInputBorder(

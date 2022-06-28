@@ -61,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.email),
                     fillColor: Colors.grey.shade100,
                     filled: true,
                     errorText:
@@ -78,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.lock),
                     fillColor: Colors.grey.shade100,
                     filled: true,
                     errorText:
