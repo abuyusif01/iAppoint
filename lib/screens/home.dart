@@ -12,9 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _email = LoginPage.getEmail();
+  static final _email = LoginPage.getEmail();
   final now = DateTime.now();
-  late BookingService mockBookingService;
+  static late BookingService mockBookingService;
   final auth = FirebaseAuth.instance;
 
   @override
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  List<DateTimeRange> converted = [];
+  static List<DateTimeRange> converted = [];
 
   List<DateTimeRange> convertStreamResultMock({required dynamic streamResult}) {
     return converted;

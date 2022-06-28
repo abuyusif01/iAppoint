@@ -234,12 +234,8 @@ class _ConfirmationState extends State<Confirmation> {
                         children: [
                           Expanded(
                             child: TextButton(
-                              onPressed: () => {
-                                // auth
-                                //     .signInWithEmailAndPassword(
-                                //         email: _email, password: _password)
-                                //     .then((_) {})
-                              },
+                              onPressed: () =>
+                                  {Navigator.pushNamed(context, 'thank_you')},
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.all(10),
                                 shape: RoundedRectangleBorder(

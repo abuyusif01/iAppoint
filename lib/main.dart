@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iappoint/firebase_options.dart';
+import 'package:iappoint/res/thanku_page.dart';
 import 'package:iappoint/screens/confirmation_page.dart';
 import 'package:iappoint/screens/home.dart';
 import 'package:iappoint/screens/login.dart';
@@ -23,13 +24,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'i-Appoint',
-      initialRoute: "home",
+      initialRoute: "login",
       routes: {
         'login': (context) => const LoginPage(),
         'signup': (context) => const SignUp(),
-        'home': (context) => const HomePage(), // need to change this
+        'home': (context) => const HomePage(),
         'confirm': (context) => const Confirmation(),
         'user_details': (context) => const UserDetails(),
+        'thank_you': (context) => const ThankYouPage(title: "Thank You"),
       },
       debugShowCheckedModeBanner: false,
     );
