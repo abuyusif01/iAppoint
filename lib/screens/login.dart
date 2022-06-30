@@ -14,6 +14,10 @@ class LoginPage extends StatefulWidget {
   static getEmail() {
     return _email;
   }
+
+  static setEmail(email) {
+    _email = email;
+  }
 }
 
 class _LoginPageState extends State<LoginPage> {

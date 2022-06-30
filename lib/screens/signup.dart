@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:iappoint/screens/login.dart';
 
 // import 'package:flutter/material.dart';
 
@@ -152,7 +153,7 @@ class _SignUpState extends State<SignUp> {
                                 _emailValidate = false;
                               }
                               if (!_passwordValidate &&
-                                  !_emailValidate &&
+                                  _emailValidate &&
                                   _password ==
                                       _confirmPasswordController.text) {
                                 auth
@@ -165,6 +166,7 @@ class _SignUpState extends State<SignUp> {
                                       .set({
                                     'mail': _email,
                                   }).then((_) {
+                                    LoginPage.setEmail(_email);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                           content: Text(
