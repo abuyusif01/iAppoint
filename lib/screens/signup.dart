@@ -150,39 +150,47 @@ class _SignUpState extends State<SignUp> {
                                   !_email.contains(".")) {
                                 _emailValidate = true;
                               } else {
-                                _emailValidate = false;
-                              }
-                              if (!_passwordValidate &&
-                                  _emailValidate &&
-                                  _password ==
-                                      _confirmPasswordController.text) {
-                                auth
-                                    .createUserWithEmailAndPassword(
-                                        email: _email, password: _password)
-                                    .then((value) {
-                                  FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(_email)
-                                      .set({
-                                    'mail': _email,
-                                  }).then((_) {
-                                    LoginPage.setEmail(_email);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              'Account created succesfully'),
-                                          backgroundColor: Colors.green),
-                                    );
-                                    Navigator.pushNamed(context, 'home');
-                                  }).onError((error, stackTrace) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              'Something went wrong with registration'),
-                                          backgroundColor: Colors.green),
-                                    );
+                                if (_password ==
+                                        _confirmPasswordController.text
+                                            .toString() &&
+                                    _password.toString().isNotEmpty) {
+                                  auth
+                                      .createUserWithEmailAndPassword(
+                                          email: _email, password: _password)
+                                      .then((value) {
+                                    FirebaseFirestore.instance
+                                        .collection('users')
+                                        .doc(_email)
+                                        .set({
+                                      'mail': _email,
+                                    }).then((_) {
+                                      LoginPage.setEmail(_email);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content: Text(
+                                                'Account created succesfully'),
+                                            backgroundColor: Colors.green),
+                                      );
+                                      Navigator.pushNamed(context, 'home');
+                                    }).onError((error, stackTrace) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content: Text(
+                                                'Something went wrong with registration'),
+                                            backgroundColor: Colors.red),
+                                      );
+                                    });
                                   });
-                                });
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Please fill in the form before submitting'),
+                                        backgroundColor: Colors.red),
+                                  );
+                                }
                               }
                             });
                           },

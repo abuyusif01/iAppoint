@@ -16,8 +16,9 @@ class _ConfirmationState extends State<Confirmation> {
 
   dynamic data;
   Future getData(email) async {
-    var collection = FirebaseFirestore.instance.collection('users');
-    var docSnapshot = await collection.doc(email).get();
+    // var collection = FirebaseFirestore.instance.collection('users');
+    var docSnapshot =
+        await FirebaseFirestore.instance.collection('users').doc(email).get();
     if (docSnapshot.exists) {
       Map<String, dynamic>? data = docSnapshot.data();
       setState(() {
